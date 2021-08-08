@@ -27,6 +27,12 @@ def get_args():
                         help='A boolean flag to sort',
                         action='store_true')
 
+    parser.add_argument('-i',
+                        '--ignore-comma',
+                        dest='ignore_comma',
+                        help='A boolean flag to supress oxford comma',
+                        action='store_true')
+
     return parser.parse_args()
 
 
@@ -37,18 +43,19 @@ def main():
     args = get_args()
     food_items = args.food_items
     should_sort = args.sorted
-
+    ignore_comma = args.ignore_comma
+    
     if should_sort:
         food_items.sort()
 
-    formatted_food_items = format_list_of_food(food_items)
+    formatted_food_items = format_list_of_food(food_items, ignore_comma)
 
     print(f'You are bringing {formatted_food_items}.')
 
 
-def format_list_of_food(food_items):
+def format_list_of_food(food_items, ignore_comma):
     formatted_food_items = ', '.join(food_items)
-    last_separator = ', and' if len(food_items) >= 3 else ' and'
+    last_separator = ', and' if len(food_items) >= 3 and not ignore_comma else ' and'
     last_comma_index = formatted_food_items.rfind(",")
     if last_comma_index == -1:
         return formatted_food_items
