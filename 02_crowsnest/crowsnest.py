@@ -28,8 +28,9 @@ def main():
     args = get_args()
     danger: str = args.danger
 
-    starting_char = danger[0].lower()
-    preposition = 'an' if starting_char in 'aeiou' else 'a'
+    starting_char = danger[0]
+    preposition = 'an' if starting_char.lower() in 'aeiou' else 'a'
+    preposition = preposition.capitalize() if starting_char.isupper() else preposition
 
     print(f'Ahoy, Captain, {preposition} {danger} off the larboard bow!')
 

@@ -47,7 +47,7 @@ def test_consonant_upper():
 
     for word in consonant_words:
         out = getoutput(f'{prg} {word.title()}')
-        assert out.strip() == template.format('a', word.title())
+        assert out.strip() == template.format('A', word.title())
 
 
 # --------------------------------------------------
@@ -65,4 +65,25 @@ def test_vowel_upper():
 
     for word in vowel_words:
         out = getoutput(f'{prg} {word.upper()}')
-        assert out.strip() == template.format('an', word.upper())
+        assert out.strip() == template.format('An', word.upper())
+
+# --------------------------------------------------
+def test_case_match():
+    """
+    an octopus
+    An Octopus
+    a whale
+    A Whale
+    """
+
+    for word in vowel_words:
+        out = getoutput(f'{prg} {word.upper()}')
+        assert out.strip() == template.format('An', word.upper())
+        out = getoutput(f'{prg} {word}')
+        assert out.strip() == template.format('an', word)
+
+    for word in consonant_words:
+        out = getoutput(f'{prg} {word.upper()}')
+        assert out.strip() == template.format('A', word.upper())
+        out = getoutput(f'{prg} {word}')
+        assert out.strip() == template.format('a', word)
