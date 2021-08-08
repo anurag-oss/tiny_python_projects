@@ -16,11 +16,15 @@ def get_args():
         description='Food items to bring to the picnic',
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('food_items', nargs='+', type=str, help='Food Items')
+    parser.add_argument('food_items', 
+                        nargs='+', 
+                        type=str,
+                        metavar='str', 
+                        help='Food Items')
 
     parser.add_argument('-s',
                         '--sorted',
-                        help='A boolean flag',
+                        help='A boolean flag to sort',
                         action='store_true')
 
     return parser.parse_args()
