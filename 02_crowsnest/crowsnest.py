@@ -29,12 +29,7 @@ def main():
     danger: str = args.danger
 
     starting_char = danger[0].lower()
-    preposition = ""
-
-    if starting_char in ("a", "e", "i", "o", "u"):
-        preposition = "an"
-    else:
-        preposition = "a"
+    preposition = 'an' if starting_char in 'aeiou' else 'a'
 
     print(f'Ahoy, Captain, {preposition} {danger} off the larboard bow!')
 
