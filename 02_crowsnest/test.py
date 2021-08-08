@@ -87,3 +87,12 @@ def test_case_match():
         assert out.strip() == template.format('A', word.upper())
         out = getoutput(f'{prg} {word}')
         assert out.strip() == template.format('a', word)
+
+# --------------------------------------------------
+def test_side():
+    """larboard and starboard"""
+
+    optional_param_side = '--side starboard'
+    for word in vowel_words:
+        out = getoutput(f'{prg} {word} {optional_param_side}')
+        assert out.strip() == template.format('an', word).replace('larboard', 'starboard')

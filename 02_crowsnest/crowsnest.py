@@ -17,6 +17,12 @@ def get_args():
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
     parser.add_argument('danger', metavar='danger', help='The imminent danger')
+    parser.add_argument('-s',
+                        '--side',
+                        help='The side of the ship',
+                        metavar='side',
+                        type=str,
+                        default='larboard')
 
     return parser.parse_args()
 
@@ -26,13 +32,14 @@ def main():
     """All logic"""
 
     args = get_args()
-    danger: str = args.danger
+    danger = args.danger
+    side = args.side
 
     starting_char = danger[0]
     preposition = 'an' if starting_char.lower() in 'aeiou' else 'a'
     preposition = preposition.capitalize() if starting_char.isupper() else preposition
 
-    print(f'Ahoy, Captain, {preposition} {danger} off the larboard bow!')
+    print(f'Ahoy, Captain, {preposition} {danger} off the {side} bow!')
 
 
 # --------------------------------------------------
