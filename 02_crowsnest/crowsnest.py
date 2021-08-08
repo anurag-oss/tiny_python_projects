@@ -35,6 +35,9 @@ def main():
     danger = args.danger
     side = args.side
 
+    if danger[0].isalpha() == False:
+        raise ValueError("The danger object should start with an alphabet")
+
     starting_char = danger[0]
     preposition = 'an' if starting_char.lower() in 'aeiou' else 'a'
     preposition = preposition.capitalize() if starting_char.isupper() else preposition

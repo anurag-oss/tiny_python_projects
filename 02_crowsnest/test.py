@@ -12,6 +12,7 @@ consonant_words = [
     'zebrafish'
 ]
 vowel_words = ['aviso', 'eel', 'iceberg', 'octopus', 'upbound']
+invalid_inputs = ['1aga', '^ada']
 template = 'Ahoy, Captain, {} {} off the larboard bow!'
 
 
@@ -96,3 +97,12 @@ def test_side():
     for word in vowel_words:
         out = getoutput(f'{prg} {word} {optional_param_side}')
         assert out.strip() == template.format('an', word).replace('larboard', 'starboard')
+
+# --------------------------------------------------
+def test_inavlid_object():
+    """input starting with number or special character"""
+
+    for word in invalid_inputs:
+        out = getoutput(f'{prg} {word}')
+        assert "ValueError" in out.strip()
+        assert 'should start with an alphabet' in out.strip()
