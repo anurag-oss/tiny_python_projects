@@ -66,3 +66,21 @@ def test_more_than_two_sorted():
     out = getoutput(f'{prg} {arg} --sorted')
     expected = ('You are bringing apples, bananas, cherries, and dates.')
     assert out.strip() == expected
+
+# --------------------------------------------------
+def test_more_than_two_sorted_supress_oxford_comma():
+    """more than two items sorted output with oxfard comma supressed"""
+
+    arg = 'bananas apples dates cherries'
+    out = getoutput(f'{prg} {arg} --sorted --ignore-comma')
+    expected = ('You are bringing apples, bananas, cherries and dates.')
+    assert out.strip() == expected
+
+# --------------------------------------------------
+def test_more_than_two_sorted_with_custom_separator():
+    """more than two items sorted output with custom separator"""
+
+    arg = 'bananas apples dates cherries'
+    out = getoutput(f'{prg} {arg} --sorted --separator ";"')
+    expected = ('You are bringing apples; bananas; cherries; and dates.')
+    assert out.strip() == expected
