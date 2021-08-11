@@ -7,6 +7,7 @@ Purpose: Rock the Casbah
 
 import argparse
 import os
+import sys
 
 
 # --------------------------------------------------
@@ -46,21 +47,25 @@ def main():
 
     text_or_file = text_or_file.upper()
 
-    if outfile != '':
-        write_file(outfile, text_or_file)
-    else:
-        print(text_or_file)
+    write_to_destination(text_or_file, outfile)
 
 
 def read_file(file_name):
     with open(file_name, mode='rt') as file_handle:
-        file_as_str = file_handle.read()
+        file_as_str = file_handle.read().rstrip()
         return file_as_str
 
 
-def write_file(file_name, content):
-    with open(file_name, mode='wt') as file_handle:
-        file_handle.write(content)
+def write_to_destination(content, file_name):
+    '''
+    We are using the trick,print can write to a file handle
+    And stdout is alse a file handle.
+    '''
+    if file_name != '':
+        with open(file_name, mode='wt') as file_handle:
+            print(content, file=file_handle)
+    else:
+        print(content, file=sys.stdout)
 
 
 # --------------------------------------------------
